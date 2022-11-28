@@ -69,23 +69,31 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button >Console Log</button>
+      <button >Console Error</button>
+      <button >Console Count</button>
+      <button >Console Warn</button>
+      <button >Console Assert</button>
+      <button >Console Clear</button>
+      <button >Console Dir</button>
+      <button >Console dirxml</button>
+      <button >Console Group Start</button>
+      <button >Console Group End</button>
+      <button >Console Table</button>
+      <button >Start Timer</button>
+      <button >End Timer</button>
+      <button >Console Trace</button>
+      <button >Trigger a Global Error</button>
     </section>
   </main>
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "a383d1a00de243b489633260dc99931d"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
 
   <script>
     let form = document.querySelector('form');
@@ -102,6 +110,121 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    
+    //Console log
+    let count = 0;
+    errorBtns[0].addEventListener('click', ()=>{
+      console.log("Console Log Demo");
+    })
+
+    // Console Error
+    errorBtns[1].addEventListener('click', ()=>{
+      console.error("Console Error Demo");
+    })
+
+    // Console Count
+    errorBtns[2].addEventListener('click', ()=>{
+      console.count('Count Button');
+      count++;
+    })
+
+    // Console warn
+    errorBtns[3].addEventListener('click', ()=>{
+      console.warn("Console Warn Button");
+    })
+
+    // Console assert
+    errorBtns[4].addEventListener('click', ()=>{
+      const number = 2;
+      const reason = 'The number does not equal 3';
+      console.assert(number == 3, {number, reason});
+    })
+
+    // Console clear
+    errorBtns[5].addEventListener('click', ()=>{
+      console.clear();
+    })
+
+    // Console dir 
+    errorBtns[6].addEventListener('click', ()=>{
+      console.dir(errorBtns[6]);
+    })
+
+    // Console dirxml
+    errorBtns[7].addEventListener('click', ()=>{
+      console.dirxml(errorBtns[7]);
+    })
+
+    // Console group start
+    errorBtns[8].addEventListener('click', ()=>{
+      console.group()
+    })
+
+    // Console group end
+    errorBtns[9].addEventListener('click', ()=>{
+      console.groupEnd()
+    })
+
+    // Console table
+    let classname = [{
+        name: 'Software Engineering',
+        num: '110',
+      },
+      {
+        name: 'Progrmng Lang:Princpl&Paradigm',
+        num: '130',
+      },
+      {
+        name: 'Advanced Software Engineering',
+        num: '112',
+      }
+    ];
+    errorBtns[10].addEventListener('click', function(){
+      console.table(classname);
+    })
+
+    // Console start time
+    errorBtns[11].addEventListener('click', ()=>{
+      console.time('Timer Button');
+    })
+
+    // Console end time
+    errorBtns[12].addEventListener('click', ()=>{
+      console.timeEnd('Timer Button');
+    })
+
+    // Console trace
+    const handleBtnClick = ()=> {deep();};
+    const deep = () => { deeper(); };
+    const deeper = () => {deepest(); };
+    const deepest = () => {console.trace();};
+    errorBtns[13].addEventListener('click', ()=>{
+      handleBtnClick();
+    })
+
+    // Trigger a Global Error
+    errorBtns[14].addEventListener('click', ()=>{
+      try {
+        if (count < 2){
+          throw new Error('please click count button twice');
+        }
+        count_twice();
+      } catch(err){
+        console.error(err.message);
+      } finally {
+        console.log('Sadly an error happended my friend');
+      }
+
+    });
+
+    function count_twice(first, last){
+      console.log("have click count button twice");
+    }
+    function aintGonnaWork(){
+      i = v;
+    }
+
+    TrackJS.track('Error tracking');
   </script>
 </body>
 
